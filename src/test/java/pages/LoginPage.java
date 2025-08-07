@@ -1,6 +1,7 @@
 package pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage {
     private final By usernameInput = By.id("user-name");
@@ -12,21 +13,15 @@ public class LoginPage extends BasePage {
     }
 
     public void enterUsername(String username) {
-        highlightElement(usernameInput);
-        slowDown();
-        driver.findElement(usernameInput).sendKeys(username);
+        waitForElementToBeVisible(usernameInput).sendKeys(username);
     }
 
     public void enterPassword(String password) {
-        highlightElement(passwordInput);
-        slowDown();
-        driver.findElement(passwordInput).sendKeys(password);
+        waitForElementToBeVisible(passwordInput).sendKeys(password);
     }
 
     public void clickLogin() {
-        highlightElement(loginButton);
-        slowDown();
-        driver.findElement(loginButton).click();
+        waitForElementToBeClickable(loginButton).click();
     }
 
     public String getCurrentUrl() {

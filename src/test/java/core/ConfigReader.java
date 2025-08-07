@@ -1,25 +1,25 @@
 package core;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-    private static Properties prop;
+    private static final Properties prop = new Properties();
 
-    public static void initProp() {
-        prop = new Properties();
-        try {
-            FileInputStream fis = new FileInputStream("src/test/resources/config/config.properties");
+    static {
+        try (FileInputStream fis = new FileInputStream("src/test/resources/config/config.properties")) {
             prop.load(fis);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load config.properties", e);
         }
     }
 
     public static String getBaseUrl() {
-        if (prop == null) {
-            initProp();
-        }
         return prop.getProperty("baseUrl");
+    }
+
+    public static String getProperty(String key) {
+        return prop.getProperty(key);
     }
 }

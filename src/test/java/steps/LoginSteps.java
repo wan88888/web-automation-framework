@@ -1,6 +1,7 @@
 package steps;
 
 import core.DriverFactory;
+import core.TestDataReader;
 import pages.LoginPage;
 import io.cucumber.java.en.*;
 import org.testng.Assert;
@@ -15,8 +16,8 @@ public class LoginSteps {
 
     @When("User enters valid username and password")
     public void user_enters_credentials() {
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        loginPage.enterUsername(TestDataReader.getLoginUsername());
+        loginPage.enterPassword(TestDataReader.getLoginPassword());
     }
 
     @And("User clicks on the login button")
